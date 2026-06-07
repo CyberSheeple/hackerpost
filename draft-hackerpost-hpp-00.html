@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Internet-Draft — Hacker Post Protocol</title>
+<meta name="description" content="A formal specification of the Hacker Post protocol: human-routed postcard mail for the hacker scene, presented as an Internet-Draft.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<h1><a href="index.html">Hacker Post</a></h1>
+<p>Human-routed postcard mail for the hacker scene.</p>
+</header>
+
+<nav aria-label="Site navigation">
+<ol>
+<li><a href="index.html">Home</a></li>
+<li><a href="guidelines.html">Message Guidelines</a></li>
+<li><a href="courier.html">Courier Runbook</a></li>
+<li><a href="postmaster.html">Postmaster Runbook</a></li>
+<li><a href="field-rules.html">Field Rules</a></li>
+<li><strong aria-current="page">Protocol Spec</strong></li>
+</ol>
+</nav>
+
+<main>
+
+<h2>The Hacker Post Protocol</h2>
+
+<figure>
+<pre><code>Internet-Draft                                                    shepherd
+Intended status: Experimental                           Hacker Post Project
+Expires: December 2026                                            June 2026
+
+
+          The Hacker Post Protocol: Human-Routed Postcard Mail
+                       for the Hacker Scene (HPP/1.0)
+
+                     draft-hackerpost-hpp-00
+
+Status of This Memo
+
+   This Internet-Draft is submitted to the hacker community for
+   discussion and comment. Distribution of this memo is unlimited.
+
+   Internet-Drafts are working documents. They are draft material and
+   subject to change or abandonment at any time. This document has no
+   formal standards body, no compliance authority, and no enforcement
+   mechanism. Participation is voluntary. Best effort is the whole
+   system.
+
+   This Internet-Draft will expire on December 7, 2026.
+
+Abstract
+
+   This document specifies the Hacker Post Protocol (HPP), an informal,
+   human-powered postcard relay system for the hacker scene. HPP defines
+   message format, routing semantics, courier behavior, postmaster
+   operations, and safety constraints for physical postcard messages
+   transported by voluntary human carriers across hackerspaces,
+   conferences, meetups, and social scenes.
+
+   In the taxonomy of networking, HPP is a delay-tolerant, store-and-
+   forward sneakernet: a human mesh in which routing decisions are made
+   locally and socially. It operates on best-effort delivery with no
+   guarantees of speed, reliability, or completeness. The design goal is
+   social cohesion, not efficient mail delivery.
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . .  1
+   2.  Conventions and Terminology . . . . . . . . . . . . . . . .  2
+   3.  Protocol Overview . . . . . . . . . . . . . . . . . . . . .  3
+   4.  Message Format  . . . . . . . . . . . . . . . . . . . . . .  4
+   5.  Addressing  . . . . . . . . . . . . . . . . . . . . . . . .  5
+   6.  Courier Specification . . . . . . . . . . . . . . . . . . .  6
+   7.  Postmaster Specification  . . . . . . . . . . . . . . . . .  7
+   8.  Routing . . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   9.  Delivery Semantics  . . . . . . . . . . . . . . . . . . . .  9
+   10. Security Considerations . . . . . . . . . . . . . . . . . . 10
+   11. Safety Constraints  . . . . . . . . . . . . . . . . . . . . 11
+   12. Operational Notes . . . . . . . . . . . . . . . . . . . . . 12
+   13. Background and Motivation . . . . . . . . . . . . . . . . . 13
+   14. References  . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+1.  Introduction
+
+   Hacker Post is an informal, human-powered postcard relay system for
+   the hacker scene. It is not regular mail. It is not private mail.
+   It is not guaranteed mail. It is a social experiment in trust,
+   travel, community, and chaos.
+
+   The idea is simple: a sender writes a postcard addressed to a
+   hacker, a hackerspace, a meetup, a conference, or a scene. The
+   postcard is passed from person to person, hopefully moving closer
+   to its intended recipient until it arrives.
+
+   A postcard MAY travel by conference backpack, train ride, hackerspace
+   bulletin board, meetup table, road trip, or someone who knows someone
+   who knows the target.
+
+   The goal is not speed. The goal is motion.
+
+2.  Conventions and Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in
+   this document are to be interpreted as described in RFC 2119.
+
+   Postcard     A visible, physical card bearing a message and routing
+                fields as defined in Section 4.
+
+   Sender       The originator of a postcard message.
+
+   Recipient    The intended target of a postcard message, identified
+                by handle, scene affiliation, or approximate location.
+
+   Courier      Any person who voluntarily transports one or more
+                postcards closer to their intended destination.
+
+   Postmaster   A person who collects, sorts, routes, and redistributes
+                postcards at a fixed or semi-fixed location.
+
+   Post Office  Any physical location where postcards are collected and
+                sorted for redistribution.
+
+   Boomerang    A courier-only action: carrying a postcard back along
+                the path it arrived on when delivery cannot be completed.
+                Because postcards carry no Sender field, boomeranging
+                relies entirely on the carrying courier's knowledge of
+                where the card came from. Postmasters cannot boomerang.
+
+   Scene        A loosely-defined social grouping within hacker culture,
+                including hackerspaces, conferences, meetups, clubs,
+                villages, and informal gatherings.
+
+3.  Protocol Overview
+
+   HPP operates as a store-and-forward relay protocol with human nodes.
+   The protocol stack is as follows:
+
+       +---------------------------+
+       |     Application Layer     |  Message content
+       +---------------------------+
+       |      Routing Layer        |  Recipient, Date, Location
+       +---------------------------+
+       |     Transport Layer       |  Courier / Postmaster
+       +---------------------------+
+       |     Physical Layer        |  Postcard (visible, tangible)
+       +---------------------------+
+
+   Flow:
+
+   1. Sender composes postcard with routing fields.
+   2. Sender deposits postcard at a post office or hands to a courier.
+   3. Courier transports postcard toward destination.
+   4. Courier delivers to recipient, post office, or next courier.
+   5. Steps 3-4 repeat until delivery or boomerang.
+
+   There is no acknowledgment mechanism. There is no retry protocol.
+   There is no timeout. Delivery MAY take days, months, or years.
+
+4.  Message Format
+
+   A compliant Hacker Post message MUST be a postcard: a single visible,
+   lightweight, physically open card. The following formats are
+   explicitly prohibited:
+
+     - Sealed envelopes
+     - Packages
+     - Hidden compartments
+     - Electronic devices (including USB drives)
+     - Substances
+     - Any object requiring border declaration
+
+   4.1.  Address Side
+
+   The address side MUST contain the following fields:
+
+     HACKER POST
+
+     Recipient: [handle, group, space, scene, or event]
+     Date:      [origination date, ISO 8601 preferred]
+     Location:  [approximate destination]
+
+     Route notes: [OPTIONAL courier annotations]
+
+   4.2.  Message Side
+
+   The message side SHOULD contain:
+
+     - The message body
+     - An OPTIONAL footer reminding handlers of protocol rules
+
+   Suggested footer text:
+
+     This is public postcard mail.
+     Do not include secrets.
+     Route closer if possible.
+     Boomerang if undeliverable.
+
+   4.3.  Courier Marks
+
+   Couriers MAY annotate the address side with brief routing notes if
+   space permits, for example:
+
+     Relayed via NYC, 2026-07-18
+     Carried from Boston to Montreal
+     Dropped at Noisebridge
+
+   Courier marks are OPTIONAL but RECOMMENDED as they make the journey
+   part of the message.
+
+5.  Addressing
+
+   5.1.  Recipient Field
+
+   The Recipient field SHOULD use one of the following forms:
+
+     - A handle or pseudonym (e.g., @zero_cool)
+     - A group or project name (e.g., Noisebridge radio table)
+     - A scene description (e.g., lockpick village folks)
+     - A role description (e.g., whoever maintains the LED wall)
+
+   The Recipient field SHOULD NOT contain:
+
+     - Legal names
+     - Private contact information
+     - Exact home or work addresses
+
+   5.2.  Date Field
+
+   The Date field MUST contain the origination date: the date the
+   postcard was written or first entered the system. ISO 8601 format
+   (YYYY-MM-DD) is RECOMMENDED.
+
+   5.3.  Location Field
+
+   The Location field SHOULD specify an approximate destination:
+
+     - A city or region
+     - A hackerspace name
+     - A conference or event
+     - A university club or meetup
+     - A vague scene reference (e.g., "NYC hacker scene")
+
+   The Location field MUST NOT contain private residential addresses.
+
+6.  Courier Specification
+
+   6.1.  Definition
+
+   A courier is any person who voluntarily moves one or more Hacker Post
+   postcards from one location to another. No registration, credential,
+   or commitment is required.
+
+   6.2.  Volunteering
+
+   A courier SHOULD announce their travel plans to a local postmaster
+   or post office. Example announcements:
+
+     "I'm going to HOPE."
+     "I can take mail toward NYC."
+     "I'm driving from Chicago to Detroit."
+
+   6.3.  Courier Constraints
+
+   A courier:
+
+     - MUST NOT feel obligated to carry all available mail.
+     - MUST NOT feel obligated to complete delivery.
+     - MUST NOT open, modify, cover, or destroy postcards.
+     - MUST NOT add private information about the recipient.
+     - MUST NOT use the system for stalking, harassment, threats,
+       or doxxing.
+     - MUST NOT carry anything they are uncomfortable carrying.
+     - SHOULD pass undeliverable mail to a postmaster or boomerang it.
+
+   6.4.  Delivery Targets
+
+   A courier SHOULD attempt to deliver postcards to one of:
+
+     - The intended recipient directly
+     - Someone who knows the recipient
+     - The named hackerspace, meetup, or event
+     - A local postmaster
+     - A relevant scene, table, or group
+
+   Finding anyone who knows, recognizes, or is likely to encounter
+   the recipient is sufficient to continue the route.
+
+   6.5.  Failed Delivery
+
+   If a courier cannot deliver, they SHOULD attempt the following
+   fallback sequence:
+
+     1. A local Hacker Post postmaster
+     2. A hackerspace or maker space
+     3. A relevant meetup or club
+     4. A trusted local hacker
+     5. Another courier heading in a better direction
+
+   If all fallbacks fail, the courier SHOULD boomerang the postcard:
+   carry it back along the path by which they received it. Because the
+   postcard has no Sender field, this depends entirely on the courier's
+   own recollection of where the card came from; no other participant
+   can perform it. Returning mail is preferable to loss.
+
+   6.6.  Prompt Deposit
+
+   A courier SHOULD deposit entrusted mail with a postmaster or
+   receiving point promptly upon arrival at the destination. Postcards
+   lingering in a courier's bag are postcards not moving through the
+   network.
+
+   If plans change or the destination becomes unreachable, the courier
+   SHOULD hand mail to another courier or deposit it at the nearest
+   post office without delay.
+
+   6.7.  Deputization
+
+   Any courier MAY deputize new couriers or new postmasters. No
+   central authority is required. The only requirement is willingness.
+   Trust propagates peer-to-peer, forming a web of trust: each
+   participant vouches for those they deputize.
+
+   A brief, tongue-in-cheek swearing-in ceremony is RECOMMENDED but
+   not required. A fist bump is a valid commissioning protocol.
+
+7.  Postmaster Specification
+
+   7.1.  Definition
+
+   A postmaster is any person who collects, sorts, routes, and
+   redistributes Hacker Post at a fixed or semi-fixed location. A
+   postmaster does not require formal appointment. Taping a cardboard
+   box to the wall and writing "POST" on it is sufficient.
+
+   7.2.  Post Office Requirements
+
+   A post office SHOULD provide:
+
+     - A visible container for incoming postcards
+     - A sorting area for outgoing postcards
+     - A sign explaining the system
+     - Blank postcards, if available
+     - A list of common destinations or upcoming events
+
+   7.3.  Suitable Locations
+
+   Post offices SHOULD be established at:
+
+     - Hackerspaces
+     - Conference villages or info tables
+     - University hacker clubs
+     - Meetups and maker spaces
+     - Community lounges
+
+   7.4.  Sorting
+
+   Postmasters SHOULD sort postcards by best next direction rather
+   than exact destination. A RECOMMENDED sorting scheme:
+
+     LOCAL      - Deliverable within the local scene
+     NORTH      - General northward routing
+     SOUTH      - General southward routing
+     EAST       - General eastward routing
+     WEST       - General westward routing
+     UNKNOWN    - Unclear destination, awaiting better routing
+
+   There is no BOOMERANG bucket. Postcards carry no Sender field, so a
+   postmaster has no origin to return mail to. Boomeranging is a
+   courier-only action (Section 6.5).
+
+   For larger events, additional categories MAY include:
+
+     - Same conference
+     - Same city / region
+     - Known hackerspace or meetup
+     - International
+     - Needs courier
+
+   Approximate routing is sufficient. Do not overthink it.
+
+   7.5.  Outgoing Mail
+
+   When a courier volunteers, the postmaster SHOULD:
+
+     - Offer mail matching the courier's direction or destination
+     - Not overload the courier
+     - Ask how much the courier is willing to carry
+
+   7.6.  Stale Mail
+
+   For mail with unclear destinations, a postmaster MAY:
+
+     - Place it in UNKNOWN and wait for a better courier
+     - Ask around gently
+     - Hand it to a courier who might have better luck
+
+   For mail that is unknown or unroutable at the local level, a
+   postmaster SHOULD route it toward a larger post office (e.g., a
+   high-traffic hackerspace, a regional hub, or a major event's post
+   table). Larger nodes have greater courier throughput and social
+   reach, increasing the probability that the card reaches a scene that
+   recognizes its recipient. Routing up the hierarchy is preferred over
+   indefinite local storage.
+
+   A postmaster MUST NOT attempt to return such mail to its origin: no
+   Sender field exists, and the origin is unknown to the post office.
+
+   For very old mail, a postmaster MAY:
+
+     - Keep it in circulation
+     - Archive it publicly
+     - Mark it as stale
+     - Display it as "lost mail"
+
+   7.7.  Accessibility Requirement
+
+   A post office MUST keep mail in an accessible location. Mail stored
+   in a private residence (e.g., under a bed, in a closet) does not
+   constitute a functioning post office.
+
+   Even temporary holdings SHOULD be maintained where couriers can
+   find them: a shelf at the hackerspace, a labeled tray at a front
+   desk, a box on a community table. The mail MUST be where the
+   people are.
+
+   7.8.  Closing a Post Office
+
+   When a temporary post office closes (end of conference, teardown of
+   a village, etc.), the postmaster MUST transfer all remaining mail
+   to couriers heading toward a more permanent post office.
+
+   Procedure:
+
+     1. Sort remaining mail by direction.
+     2. Identify couriers heading toward permanent post offices.
+     3. Transfer all remaining mail.
+     4. If no courier is available, the postmaster SHOULD personally
+        carry remaining mail to the nearest permanent post office.
+
+   A post office closing is NOT an acceptable reason for mail loss.
+
+   7.9.  Deputization
+
+   Postmasters MAY deputize new couriers and new postmasters. If
+   someone wishes to carry mail or establish a post office at their
+   space, the existing postmaster SHOULD welcome them in.
+
+   A brief ritual is RECOMMENDED. Formality is optional.
+
+   7.10. Postmaster Ethics
+
+   A postmaster:
+
+     - MUST NOT turn Hacker Post into a surveillance system.
+     - MUST NOT maintain private dossiers of handles, real names,
+       addresses, or travel patterns.
+     - MUST NOT pressure people to reveal identities.
+     - MUST NOT route mail that appears threatening, harassing,
+       doxing-related, illegal, or unsafe.
+     - SHOULD refuse, return, or remove any postcard that feels wrong.
+
+   Best effort does not mean no judgment.
+
+8.  Routing
+
+   8.1.  Routing Algorithm
+
+   HPP uses a social distance-minimizing heuristic:
+
+     1. Identify the general direction or scene of the destination.
+     2. Hand the postcard to someone moving in that direction.
+     3. Repeat until delivered or undeliverable.
+
+   There is no global routing table. There is no address resolution
+   protocol. Routing knowledge is entirely local and social.
+
+   This is opportunistic routing: forwarding decisions are made on
+   contact, based on where carriers happen to be going. The gossip-like
+   spread of "someone who knows someone" is a feature, not a bug.
+
+   8.2.  Routing Principles
+
+     - Route mail closer to the target.
+     - Hand it to someone going the right direction.
+     - Drop it at a likely hackerspace.
+     - Ask around without being creepy.
+     - Let the network do what networks do.
+
+   8.3.  Multi-Hop Delivery
+
+   A postcard MAY pass through an arbitrary number of couriers and
+   post offices before reaching its destination. Each hop SHOULD
+   move the postcard closer in social or geographic distance.
+
+   Postcards MAY travel non-monotonically (i.e., away from the
+   destination) if doing so places them in a better routing position.
+
+9.  Delivery Semantics
+
+   9.1.  Best Effort
+
+   HPP provides ONLY best-effort delivery. There is:
+
+     - No guarantee of delivery
+     - No guarantee of timing
+     - No acknowledgment mechanism
+     - No retry mechanism
+     - No error correction
+     - No obligation on any participant
+
+   9.2.  Delivery Definition
+
+   A postcard is considered "delivered" when any of the following
+   conditions are met:
+
+     - Handed to the intended recipient
+     - Given to someone who knows the recipient
+     - Deposited at the named hackerspace, meetup, or event
+     - Passed to a local postmaster in the destination scene
+     - Left with a relevant group, village, or table
+
+   9.3.  Failure Modes
+
+   Postcards MAY be:
+
+     - Delayed indefinitely
+     - Misrouted
+     - Lost
+     - Photographed or archived
+     - Returned to origin (boomerang)
+     - Permanently undeliverable
+
+   All failure modes are acceptable. The system is not designed for
+   reliability.
+
+   9.4.  Consistency and Resilience
+
+   HPP is eventually consistent, with emphasis on "eventually": a
+   postcard converges on its destination over an unbounded period, or
+   not at all. The origination Date functions as a loose time-to-live
+   (TTL) that informs, but never automates, decisions about stale mail.
+
+   The network is self-healing in a weak sense. When a node (courier or
+   post office) disappears, the mail it held SHOULD be returned to
+   circulation so that surviving nodes can re-route it. Failure of any
+   single node MUST NOT be fatal to a message, provided its custodian
+   follows Sections 6.5 and 7.8.
+
+10. Security Considerations
+
+   10.1.  No Confidentiality
+
+   HPP provides NO confidentiality. All postcards MUST be considered
+   public. Any person handling the postcard MAY read its contents.
+   This is by design, not a flaw.
+
+   10.2.  No Integrity Protection
+
+   HPP provides no integrity protection. Postcards MAY be annotated
+   by couriers (route marks). However, couriers MUST NOT modify or
+   obscure the original message content.
+
+   10.3.  No Authentication
+
+   HPP provides no sender or recipient authentication. Handles and
+   scene affiliations are self-asserted. There is no verification
+   mechanism for identity claims.
+
+   10.4.  No Availability Guarantee
+
+   HPP provides no availability guarantee. The system operates only
+   when volunteers choose to participate. Total cessation of activity
+   is a valid system state.
+
+11. Safety Constraints
+
+   11.1.  Prohibited Content
+
+   Postcards MUST NOT contain:
+
+     - Passwords or private keys
+     - Home addresses or phone numbers
+     - Legal names without consent
+     - Sensitive personal information
+     - Doxxing material
+     - Threats or harassment
+     - Instructions for harm
+     - Anything endangering any participant
+
+   11.2.  Prohibited Physical Forms
+
+   The following MUST NOT be sent via HPP:
+
+     - Sealed envelopes
+     - Packages of any kind
+     - Hidden compartments
+     - USB drives or electronics
+     - Substances
+     - Objects requiring customs declaration
+
+   11.3.  Behavioral Constraints
+
+   Participants MUST NOT:
+
+     - Use the system for stalking or harassment
+     - Pressure others to reveal identities
+     - Track individuals through the system
+     - Create obligations or demands via postcard
+     - Make couriers unwilling participants in conflict
+
+12. Operational Notes
+
+   12.1.  Recommended Message Content
+
+   Good messages include:
+
+     - Greetings and jokes
+     - Puzzles and ASCII art
+     - Tiny trip reports
+     - Conference notes
+     - Invitations to public events
+     - Scene lore
+     - "I heard you might know someone who knows..."
+     - Stickers, stamps, doodles, and marks of passage
+
+   12.2.  Discouraged Message Content
+
+   Bad messages include:
+
+     - Harassment or creepy tracking
+     - Doxxing or demands
+     - Threats or romance pressure
+     - Private drama
+     - Anything requiring secrecy
+
+   12.3.  Addressing Best Practices
+
+   Preferred:
+
+     Recipient: @packetwitch
+     Location:  NYC / hacker meetups
+
+     Recipient: lockpick village folks
+     Location:  DEF CON
+
+     Recipient: someone from Pumping Station: One
+     Location:  Chicago
+
+   Discouraged:
+
+     Recipient: [Full Legal Name]
+     Location:  [Exact home address]
+
+13. Background and Motivation
+
+   HPP is inspired by Chaos Post, the intra-event postal system that
+   appears at hacker conferences and chaos events. At Chaos Post,
+   attendees write postcards to others at the event, address them
+   with whatever clues they have, and send them into the crowd via
+   volunteer couriers.
+
+   The postcard becomes a social excuse. It gives new attendees a
+   reason to wander, shy people a reason to talk to strangers, and
+   turns the event into a human routing problem.
+
+   HPP extends this concept beyond single events. It assumes the
+   hacker scene is a living network: hackerspaces, makerspaces,
+   university clubs, meetups, conferences, train rides, couches,
+   basements, and people who know people who know people.
+
+   It also observes that the physical-transport layer is the one
+   communications layer the community has never operated for itself,
+   having historically been ceded to commercial carriers and postal
+   monopolies. HPP is a deliberately non-commercial, decentralized
+   occupation of that layer. There is no operator, no fee, and nothing
+   to acquire.
+
+   There is always someone traveling somewhere.
+
+   The point is not efficient mail delivery. The point is social
+   cohesion. HPP gives participants an excuse to strengthen the
+   weak ties that make the hacker scene feel alive: to visit each
+   other's spaces, learn who is active in other cities, remember
+   that the internet is made of people, and create small moments
+   of surprise across distance.
+
+   HPP runs at the speed of trust, travel, coincidence, and chaos.
+
+14. References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [CHAOSPOST] Chaos Post, Chaos Communication Congress postal system.
+              https://chaospost.de/
+
+   [RFC1149]  Waitzman, D., "Standard for the Transmission of IP
+              Datagrams on Avian Carriers", RFC 1149, April 1990.
+
+   [RFC6214]  Carpenter, B. and R. Hinden, "Adaptation of RFC 1149
+              for IPv6", RFC 6214, April 2011.
+
+Authors' Address
+
+   shepherd
+   Hacker Post Project
+   No fixed address
+   Distributed across hackerspaces, conferences, and transit systems
+   worldwide
+
+   Contact: Leave a postcard at your nearest hackerspace.
+
+Full Copyright Statement
+
+   This document is placed in the public domain. There is no copyright
+   claim, no patent claim, and no usage restriction. Copy it, modify
+   it, fork it, print it, tape it to the wall, or fold it into a
+   paper airplane. The protocol belongs to everyone who plays along.</code></pre>
+</figure>
+
+<nav aria-label="Page navigation">
+<p><a href="field-rules.html">&larr; Previous: Field Rules</a></p>
+<p><a href="index.html">Back to home</a></p>
+</nav>
+
+</main>
+
+<footer>
+<p>Hacker Post is not a service. It is a protocol. It belongs to everyone who plays along.</p>
+</footer>
+
+</body>
+</html>

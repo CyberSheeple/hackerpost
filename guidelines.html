@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Message Guidelines — Hacker Post</title>
+<meta name="description" content="The Hacker Post message specification: postcard requirements, field reference, content policy, privacy model, and templates.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<h1><a href="index.html">Hacker Post</a></h1>
+<p>Human-routed postcard mail for the hacker scene.</p>
+</header>
+
+<nav aria-label="Site navigation">
+<ol>
+<li><a href="index.html">Home</a></li>
+<li><strong aria-current="page">Message Guidelines</strong></li>
+<li><a href="courier.html">Courier Runbook</a></li>
+<li><a href="postmaster.html">Postmaster Runbook</a></li>
+<li><a href="field-rules.html">Field Rules</a></li>
+<li><a href="draft-hackerpost-hpp-00.html">Protocol Spec</a></li>
+</ol>
+</nav>
+
+<main>
+
+<h2>Message Guidelines</h2>
+
+<p>This is what counts as a valid Hacker Post message: what it can physically be, the fields it needs, what you can write on it, and the one privacy rule that matters. If you prefer your rules in dry standards-ese, the <a href="draft-hackerpost-hpp-00.html">Protocol Spec</a> says all of this with more capital letters.</p>
+
+<h3>1. Physical requirements</h3>
+
+<p>It is a postcard. One card, lightweight, open, the kind of thing a stranger can carry in a jacket pocket without a second thought. Nothing sealed, nothing hidden inside, nothing anyone has to explain at a border.</p>
+
+<table>
+<caption>Accepted and prohibited physical forms</caption>
+<thead>
+<tr>
+<th scope="col">Accepted</th>
+<th scope="col">Prohibited</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open postcards</td>
+<td>Sealed envelopes</td>
+</tr>
+<tr>
+<td>Visible written messages</td>
+<td>Packages of any kind</td>
+</tr>
+<tr>
+<td>Stickers, stamps, doodles</td>
+<td>Hidden compartments</td>
+</tr>
+<tr>
+<td>Lightweight paper cards</td>
+<td>USB drives, electronics</td>
+</tr>
+<tr>
+<td>Anything safe to hand to a stranger</td>
+<td>Substances, or anything requiring a border declaration</td>
+</tr>
+</tbody>
+</table>
+
+<h3>2. Field reference</h3>
+
+<p>A card carries a few fields. Recipient, Date, and Location are the routing header; Message is the payload; Route notes get scribbled on in transit by whoever carries it.</p>
+
+<table>
+<caption>Postcard field definitions</caption>
+<thead>
+<tr>
+<th scope="col">Field</th>
+<th scope="col">Required</th>
+<th scope="col">Format</th>
+<th scope="col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th scope="row">Recipient</th>
+<td>Yes</td>
+<td>Handle, group, space, scene, or role</td>
+<td>Real names discouraged. See addressing below.</td>
+</tr>
+<tr>
+<th scope="row">Date</th>
+<td>Yes</td>
+<td>Origination date, ISO 8601 (<samp>YYYY-MM-DD</samp>)</td>
+<td>The date the postcard was written or entered the system.</td>
+</tr>
+<tr>
+<th scope="row">Location</th>
+<td>Yes</td>
+<td>Approximate destination</td>
+<td>City, region, hackerspace, event, or vague scene. Never a private address.</td>
+</tr>
+<tr>
+<th scope="row">Message</th>
+<td>Yes</td>
+<td>Free text, public</td>
+<td>Assume everyone in the relay will read it.</td>
+</tr>
+<tr>
+<th scope="row">Route notes</th>
+<td>No</td>
+<td>Short courier annotations</td>
+<td>Optional but recommended. Added by couriers in transit.</td>
+</tr>
+</tbody>
+</table>
+
+<h3>3. Privacy model</h3>
+
+<p>There is none. That is not an oversight&mdash;it is the design. A postcard is readable by everyone who touches it, and a lot of people will touch it. Expect cards to be read, delayed, misrouted, photographed, archived, and occasionally returned to sender by a stranger who found it funny.</p>
+
+<p>So: <strong>no secrets on postcards.</strong> If leaking it would ruin someone&rsquo;s week, it does not go on a card. That rules out:</p>
+
+<ul>
+<li>Passwords or private keys</li>
+<li>Home addresses or phone numbers</li>
+<li>Legal names without consent</li>
+<li>Sensitive personal information or doxxing material</li>
+<li>Threats, harassment, or instructions for harm</li>
+<li>Anything that would endanger the sender, recipient, courier, or postmaster</li>
+</ul>
+
+<h3>4. Content policy</h3>
+
+<p>Keep it kind, keep it weird, keep it deliverable. The whole system runs on goodwill, so do not be the reason someone stops carrying mail.</p>
+
+<table>
+<caption>Encouraged and discouraged message content</caption>
+<thead>
+<tr>
+<th scope="col">Do</th>
+<th scope="col">Don&rsquo;t</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Greetings, jokes, puzzles, ASCII art</td>
+<td>Harassment or creepy tracking</td>
+</tr>
+<tr>
+<td>Tiny trip reports and conference notes</td>
+<td>Doxxing or demands</td>
+</tr>
+<tr>
+<td>&ldquo;I heard you might know someone who knows&hellip;&rdquo;</td>
+<td>Threats or romance pressure</td>
+</tr>
+<tr>
+<td>Invitations to public events, scene lore</td>
+<td>Private drama</td>
+</tr>
+<tr>
+<td>Stickers, stamps, doodles, marks of passage</td>
+<td>Anything that turns couriers into unwilling participants in conflict</td>
+</tr>
+</tbody>
+</table>
+
+<h3>5. Addressing</h3>
+
+<p>Handles and rough locations, please. Counterintuitively, the vaguer and more social the address, the better it routes&mdash;a handle plus a scene gives a courier something to ask around about. A legal name and a street address just gives them the creeps.</p>
+
+<table>
+<caption>Preferred and discouraged addressing</caption>
+<thead>
+<tr>
+<th scope="col">Preferred</th>
+<th scope="col">Discouraged</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><samp>@packetwitch</samp> / NYC &middot; hacker meetups</td>
+<td>Full legal name / exact home address</td>
+</tr>
+<tr>
+<td><samp>lockpick village folks</samp> / DEF CON</td>
+<td>Real workplace desk location / private event</td>
+</tr>
+<tr>
+<td><samp>someone from Pumping Station: One</samp> / Chicago</td>
+<td>Anything that identifies a private individual</td>
+</tr>
+</tbody>
+</table>
+
+<h4>When there&rsquo;s no handle to work with</h4>
+
+<p>Not everyone has a handle. Some people never picked one up; others go by something that reads like an ordinary name. As Joey put it:</p>
+
+<blockquote>
+<p>&ldquo;I need a handle, man. I don&rsquo;t have an identity until I have a handle.&rdquo;</p>
+</blockquote>
+
+<p>Route them anyway. The trick is to be specific without being identifying&mdash;pile on enough context that the right scene knows exactly who you mean, while a stranger reading the card learns nothing useful about a private person.</p>
+
+<p>&ldquo;Joey in NYC&rdquo; is not addressable; there are a thousand Joeys. But a Joey pinned to a project, a table, a regular night, or a running joke usually is:</p>
+
+<table>
+<caption>Addressing someone without a usable handle</caption>
+<thead>
+<tr>
+<th scope="col">Too thin</th>
+<th scope="col">Specific without naming</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Joey / NYC</td>
+<td>Joey who runs the Tuesday solder night / NYC Resistor</td>
+</tr>
+<tr>
+<td>Sarah / Berlin</td>
+<td>The Sarah with the cat-themed badge / c-base regulars</td>
+</tr>
+<tr>
+<td>that one guy / DEF CON</td>
+<td>the guy who soldered cursed LEDs near the lockpick village / DEF CON</td>
+</tr>
+</tbody>
+</table>
+
+<p>A real first name is fine when it is paired with a scene and a detail. A full legal name is not&mdash;that is identifying a private person on a public card, which is exactly what we are avoiding.</p>
+
+<h3>6. Postcard templates</h3>
+
+<p>Not mandatory&mdash;a card with the right fields scrawled on it works fine&mdash;but if you like a tidy layout, steal these.</p>
+
+<p>Address side:</p>
+
+<figure>
+<pre><code>┌─────────────────────────────────────┐
+│ HACKER POST                         │
+│                                     │
+│ Recipient: ________________________ │
+│ Date:      ________________________ │
+│ Location:  ________________________ │
+│                                     │
+│ Route notes:                        │
+│ ________________________________    │
+│ ________________________________    │
+└─────────────────────────────────────┘</code></pre>
+</figure>
+
+<p>Message side:</p>
+
+<figure>
+<pre><code>┌─────────────────────────────────────┐
+│                                     │
+│ Message:                            │
+│                                     │
+│                                     │
+│                                     │
+│                                     │
+│                                     │
+│                                     │
+│ ─────────────────────────────────── │
+│ This is public postcard mail.       │
+│ Do not include secrets.             │
+│ Route closer if possible.           │
+│ Boomerang if undeliverable.         │
+└─────────────────────────────────────┘</code></pre>
+</figure>
+
+<h3>7. Worked example</h3>
+
+<p>What a good one looks like in the wild&mdash;a real handle, a rough destination, and a message that gives a courier a reason to go find the right table:</p>
+
+<figure>
+<pre><code>┌─────────────────────────────────────┐
+│ HACKER POST                         │
+│                                     │
+│ Recipient: @badgelife_alchemist     │
+│ Date:      2026-08-09               │
+│ Location:  Las Vegas / badge scene  │
+│                                     │
+│ Message:                            │
+│ Your SAO from last year made it to  │
+│ a table in Brooklyn. Someone here   │
+│ says the blinking pattern was a     │
+│ joke. Confirm or deny?              │
+│                                     │
+│ Route notes:                        │
+│ NYC → HOPE table → DEF CON?        │
+└─────────────────────────────────────┘</code></pre>
+</figure>
+
+<nav aria-label="Page navigation">
+<p><a href="index.html">&larr; Home</a></p>
+<p><a href="courier.html">Next: Courier Runbook &rarr;</a></p>
+</nav>
+
+</main>
+
+<footer>
+<p>Hacker Post is not a service. It is a protocol. It belongs to everyone who plays along.</p>
+</footer>
+
+</body>
+</html>

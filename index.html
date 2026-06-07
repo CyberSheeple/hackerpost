@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hacker Post — Human-Routed Postcard Mail for the Hacker Scene</title>
+<meta name="description" content="Hacker Post is a decentralized, human-powered postcard relay for the hacker scene. No company, no app, no account. Just postcards and people willing to carry them.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<h1><a href="index.html">Hacker Post</a></h1>
+<p>Human-routed postcard mail for the hacker scene.</p>
+</header>
+
+<nav aria-label="Site navigation">
+<ol>
+<li><strong aria-current="page">Home</strong></li>
+<li><a href="guidelines.html">Message Guidelines</a></li>
+<li><a href="courier.html">Courier Runbook</a></li>
+<li><a href="postmaster.html">Postmaster Runbook</a></li>
+<li><a href="field-rules.html">Field Rules</a></li>
+<li><a href="draft-hackerpost-hpp-00.html">Protocol Spec</a></li>
+</ol>
+</nav>
+
+<main>
+
+<p class="lede">Hackers run every communications network except one. Hacker Post is us having a go at the last one.</p>
+
+<p>We route the packets. We host the mesh, run the radios, and keep the servers limping along at 3am. We have rebuilt every layer of the stack ourselves, for fun and occasionally out of spite. Every layer except one: physically moving a thing from a person to a person. That part still belongs to logistics giants and a postal monopoly or two. Hacker Post is a decentralized, run-by-whoever crack at it anyway.</p>
+
+<p>The funny thing is that the best routing protocol for a postcard turns out to be the one that has always moved people around: a postcard is an excuse. An excuse to wander a con you would otherwise speedrun. An excuse for the shy person to walk up and say &ldquo;hey, are you @so-and-so?&rdquo; It turns a room full of nametags into a routing problem you actually want to solve. And when a card lands in the right hands six months later, it feels like magic, even though it is just people.</p>
+
+<h2>Why bother</h2>
+
+<p>This is not a delivery service, and nobody is optimizing throughput. The point is the scene.</p>
+
+<p>Most of what connects us now is owned by someone, monetized by someone, and quietly shut down by someone the moment it stops printing money. Hacker Post is the opposite of that. No company. No app. No account. No terms of service to pretend you read. Just a pile of postcards and people willing to carry them.</p>
+
+<p>It is an excuse to show up at each other&rsquo;s spaces, find out who is actually active two cities over, and remember that the internet is people, not platforms. The weak ties are the whole point&mdash;they are the thing that makes a scene feel like a scene instead of a group chat.</p>
+
+<p>And someone is always going somewhere.</p>
+
+<ul>
+<li>Off to a con? Take some Hacker Post.</li>
+<li>Visiting another city? Take some Hacker Post.</li>
+<li>Stuck somewhere on a work trip? Find the local hackerspace and bring it a postcard.</li>
+<li>Home for the holidays? Sneak out to the space across town and drop some off.</li>
+</ul>
+
+<h2>What it actually is</h2>
+
+<p>Strip away the romance and it is a relay. You write a card, hand it off, and it hops person to person until it gets close enough to its target to land.</p>
+
+<p>If you want the buzzword-compliant version: a delay-tolerant, store-and-forward sneakernet. The nodes are people, the links are whoever is catching a train this weekend, and the routing table lives in everybody&rsquo;s head. A human mesh held together by a web of trust and absolutely nobody&rsquo;s SLA.</p>
+
+<p>It is not private, and it is not trying to be. Assume every card is exactly what it looks like: open, readable, and probably about to be photographed by someone who thinks it is funny. Do not write anything you would not pin to a public board.</p>
+
+<p><strong>Speed is not a feature. Motion is.</strong></p>
+
+<h2>Where we stole it from</h2>
+
+<p>Credit where it is due: the idea comes straight from Chaos Post, the postal system that pops up at CCC and other chaos events. There you scribble a card to someone at the event, address it with whatever you have (&ldquo;tall, German, soldering cursed LEDs near the lounge&rdquo;), and toss it into the crowd. A volunteer goes looking. Half the fun is that chasing a delivery drags you into corners of the event you would never have wandered into otherwise.</p>
+
+<p>Chaos Post lives and dies with the event. Hacker Post just does not stop. The scene is not one weekend in a convention center; it is hackerspaces, makerspaces, university clubs, meetups, group chats, the friend with a car, the couch you crashed on, and the long chain of people who know people. We route across all of it.</p>
+
+<h2>How it works</h2>
+
+<ol>
+<li>Write a card. Address it to a handle, a space, a meetup, a scene&mdash;whatever you have actually got.</li>
+<li>Hand it to someone headed roughly the right direction.</li>
+<li>Repeat until it lands. Or until it does not. A card might take a weekend or three years, with a detour through two hackerspaces and somebody&rsquo;s backpack. Eventual consistency, heavy on the eventual. That is the deal, and that is fine.</li>
+</ol>
+
+<p>It moves at the speed of trust, travel, and coincidence. No tracking number. No refunds.</p>
+
+<h2>The spirit of the thing</h2>
+
+<p>Treat it like a protocol you enjoy implementing:</p>
+
+<ul>
+<li>Push it closer to the target.</li>
+<li>Hand it to someone going the right way.</li>
+<li>Drop it at a hackerspace that will know what to do with it.</li>
+<li>Ask around. Do not be a creep about it.</li>
+<li>Let the network do its thing.</li>
+</ul>
+
+<p>Nobody has to carry anything. Nobody owes you a delivery. Nobody gets nagged. If that sounds unreliable&mdash;good. Best effort is the entire spec, and the spec is open for anyone to fork.</p>
+
+<h2>Get started</h2>
+
+<dl>
+<dt><a href="guidelines.html">Message Guidelines</a></dt>
+<dd>How to write and address a card so it actually stands a chance: fields, format, and what not to put on a public postcard.</dd>
+
+<dt><a href="courier.html">Courier Runbook</a></dt>
+<dd>You are traveling anyway. Here is how to carry mail, drop it off, and hand it onward without overthinking it.</dd>
+
+<dt><a href="postmaster.html">Postmaster Runbook</a></dt>
+<dd>Want to run a node? Set up a box, sort what comes in, and keep mail moving (and out from under your bed).</dd>
+
+<dt><a href="field-rules.html">Field Rules</a></dt>
+<dd>The whole thing on one page. Print it, tape it above the post box, done.</dd>
+
+<dt><a href="draft-hackerpost-hpp-00.html">Protocol Spec</a></dt>
+<dd>For the standards nerds: the full protocol, written up as a perfectly serious Internet-Draft.</dd>
+</dl>
+
+</main>
+
+<footer>
+<p>Not a service. Not a startup. A protocol&mdash;and it belongs to anyone who plays along.</p>
+</footer>
+
+</body>
+</html>

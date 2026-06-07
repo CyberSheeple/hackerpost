@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Postmaster Runbook — Hacker Post</title>
+<meta name="description" content="The Hacker Post postmaster runbook: setting up a post office, sorting, handing off to couriers, handling stale mail, closing a temporary office, and ethics.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+<h1><a href="index.html">Hacker Post</a></h1>
+<p>Human-routed postcard mail for the hacker scene.</p>
+</header>
+
+<nav aria-label="Site navigation">
+<ol>
+<li><a href="index.html">Home</a></li>
+<li><a href="guidelines.html">Message Guidelines</a></li>
+<li><a href="courier.html">Courier Runbook</a></li>
+<li><strong aria-current="page">Postmaster Runbook</strong></li>
+<li><a href="field-rules.html">Field Rules</a></li>
+<li><a href="draft-hackerpost-hpp-00.html">Protocol Spec</a></li>
+</ol>
+</nav>
+
+<main>
+
+<h2>Postmaster Runbook</h2>
+
+<p>A postmaster collects mail, sorts it, and pushes it back out. That is the whole job. You do not need an office or a title&mdash;plenty of postmasters are just the person who taped a box to the wall, wrote &ldquo;POST&rdquo; on it, and started telling people about it.</p>
+
+<p>Post offices are federated, which is a fancy way of saying nobody is in charge. You run yours, someone else runs theirs, mail flows between them, and no central server gets to decide whose node counts. If your space goes quiet, the mail routes around it. Try doing that with a courier monopoly.</p>
+
+<aside>
+<h3>At a glance</h3>
+<ol>
+<li>Collect postcards somewhere visible and reachable.</li>
+<li>Sort by best next direction.</li>
+<li>Hand matching mail to couriers heading that way.</li>
+<li>Closing up? Transfer everything onward first.</li>
+</ol>
+</aside>
+
+<h3>Procedure: Set up a post office</h3>
+
+<p><strong>When:</strong> you want to start collecting and routing mail at your space or event.</p>
+
+<ol>
+<li>Provide a visible container (box, tray, folder, envelope) for incoming postcards.</li>
+<li>Set aside a place to sort outgoing postcards.</li>
+<li>Post a sign explaining the system.</li>
+<li>Stock a few blank postcards, if available.</li>
+<li>Optionally, keep a list of common destinations or upcoming events.</li>
+</ol>
+
+<p>Good locations: hackerspaces, conference villages, info tables, university clubs, meetups, maker spaces, community lounges.</p>
+
+<aside>
+<h3>Rule: Keep the mail reachable</h3>
+<p>A box people can actually get to is the whole point. Mail in a drawer at your apartment is not a post office, it is a hostage situation. Put it on a shelf at the space, a labeled tray at the desk, a box on the common table&mdash;somewhere a courier can paw through it without texting you first. If you have to babysit it at home for a night, fine, but get it back where the people are at the next chance.</p>
+</aside>
+
+<h3>Procedure: Intake and sort</h3>
+
+<p><strong>When:</strong> postcards arrive in the incoming container.</p>
+
+<p>Sort by the next good hop, not the final address. You are not running a logistics network; you are pointing cards roughly the right way and trusting the next person to do the same. Close enough is the standard.</p>
+
+<table>
+<caption>Recommended sorting buckets</caption>
+<thead>
+<tr>
+<th scope="col">Bucket</th>
+<th scope="col">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr><th scope="row">LOCAL</th><td>Deliverable within the local scene</td></tr>
+<tr><th scope="row">NORTH / SOUTH / EAST / WEST</th><td>General directional routing</td></tr>
+<tr><th scope="row">UNKNOWN</th><td>Unclear destination, awaiting better routing</td></tr>
+</tbody>
+</table>
+
+<p>For larger events, you may add finer categories: same conference, same city, same region, known hackerspace, known meetup, international, or needs courier.</p>
+
+<h3>Procedure: Local delivery</h3>
+
+<p><strong>When:</strong> mail is destined for the local scene.</p>
+
+<p>Let it circulate through the scene: bring it to the next meetup, ask around at the space, pin it to a public mail board, or hand it to whoever says &ldquo;oh, I know them.&rdquo; You do not need to find the recipient yourself&mdash;just find someone closer to them than you are.</p>
+
+<h3>Procedure: Hand off to couriers</h3>
+
+<p><strong>When:</strong> someone says they are headed somewhere.</p>
+
+<ol>
+<li>Pull the mail that roughly matches their route.</li>
+<li>Ask how much they actually want&mdash;a couple cards or a fistful.</li>
+<li>Believe them, and do not guilt them into more.</li>
+</ol>
+
+<blockquote>
+<p>Courier: &ldquo;I&rsquo;m going to Philly.&rdquo;</p>
+<p>Postmaster: Give them mail for Philly, nearby Pennsylvania, DC/Baltimore maybe, or anything generally southwest if it helps.</p>
+</blockquote>
+
+<h3>Procedure: Handle unknown or stale mail</h3>
+
+<p><strong>When:</strong> a card has no obvious next hop, or has been gathering dust.</p>
+
+<p>Treat the date on it as a loose time-to-live. Nothing expires on a timer&mdash;this is not a cron job&mdash;but the older a card gets, the more it deserves a decision instead of another month in the box.</p>
+
+<p>If you cannot tell where it goes: drop it in UNKNOWN, ask around, and when in doubt, push it toward a larger post office&mdash;a busy hackerspace, a regional hub, the post table at a big con. Bigger nodes see more couriers and more people, so a card that is dead-ended at your box might find its scene there. Routing up the hierarchy beats letting it rot.</p>
+
+<p>Note what you cannot do: there is no sender field on a postcard, so you cannot return it to sender&mdash;you have no idea where it started. Boomeranging is a courier&rsquo;s move, not a postmaster&rsquo;s, because only the courier who carried a card knows which way it came.</p>
+
+<p>For genuinely ancient mail, pick whatever feels right: keep it in rotation, hand it to a courier who might get lucky, or retire it to the wall as &ldquo;lost mail.&rdquo; A pinned-up graveyard of undeliverable cards is, frankly, great decor.</p>
+
+<h3>Procedure: Close a temporary post office</h3>
+
+<p><strong>When:</strong> a temporary office is shutting down (end of conference, teardown of a village or camp).</p>
+
+<p>Everything left in the box has to go to couriers headed toward a more permanent post office before you tear down. The network heals around a dead node on its own&mdash;but only if you shove its mail back into circulation first. The fastest way to kill Hacker Post is to let a con&rsquo;s worth of cards end up in a recycling bin on Sunday night.</p>
+
+<ol>
+<li>Sort remaining mail by direction.</li>
+<li>Find couriers heading toward permanent hackerspaces or post offices.</li>
+<li>Hand off all remaining mail.</li>
+<li>If no courier is available, carry it yourself to the nearest permanent post office.</li>
+</ol>
+
+<p><strong>A post office closing is not an excuse for mail to disappear.</strong></p>
+
+<h3>Procedure: Deputize a new courier or postmaster</h3>
+
+<p><strong>When:</strong> someone wants to carry mail or stand up a post office of their own.</p>
+
+<p>Wave them in&mdash;the network only grows if existing nodes keep minting new ones. You can swear in couriers and fellow postmasters alike. Keep the ceremony short and appropriately ridiculous:</p>
+
+<blockquote>
+<p>&ldquo;Do you solemnly swear to keep this mail moving, not hoard it, and maintain it in a place where humans can actually find it?&rdquo;</p>
+<p>&ldquo;I do.&rdquo;</p>
+<p>&ldquo;Then by the power vested in me by a cardboard box with POST written on it, I hereby deputize you.&rdquo;</p>
+</blockquote>
+
+<p>A handshake, a salute, or a knowing nod will also suffice.</p>
+
+<h3>Don&rsquo;t be a cop</h3>
+
+<p>You are holding a pile of cards and a rough picture of who is moving where. That is exactly the kind of thing that curdles into surveillance if you let it. Don&rsquo;t. Best effort still leaves room for judgment&mdash;if a card feels wrong, refuse it, return it, or pull it from circulation.</p>
+
+<ul>
+<li>Do not turn this into a tracking system. We have enough of those.</li>
+<li>Do not keep dossiers on handles, real names, addresses, or who travels where.</li>
+<li>Do not press anyone to reveal who someone really is.</li>
+<li>Do not route anything that reads as threatening, harassing, doxing, or otherwise unsafe.</li>
+</ul>
+
+<nav aria-label="Page navigation">
+<p><a href="courier.html">&larr; Previous: Courier Runbook</a></p>
+<p><a href="field-rules.html">Next: Field Rules &rarr;</a></p>
+</nav>
+
+</main>
+
+<footer>
+<p>Hacker Post is not a service. It is a protocol. It belongs to everyone who plays along.</p>
+</footer>
+
+</body>
+</html>
