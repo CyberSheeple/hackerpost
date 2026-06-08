@@ -392,6 +392,19 @@ Table of Contents
      - Not overload the courier
      - Ask how much the courier is willing to carry
 
+   A postmaster SHOULD additionally ask a courier where they travelled
+   FROM, not only where they are going. A visiting ("foreign") courier
+   returning home is a high-value vector for return mail addressed
+   toward their origin scene. The postmaster SHOULD load such couriers
+   with mail bound for, or roughly along the route to, their home
+   location for the return trip.
+
+   Where no suitable visiting courier is available, mail SHOULD be held
+   in its directional bucket until one appears. Events and large
+   meetups are especially productive: the population of visiting
+   couriers is high and about to disperse toward many origins, so a
+   postmaster SHOULD work the room before teardown.
+
    7.6.  Stale Mail
 
    For mail with unclear destinations, a postmaster MAY:
