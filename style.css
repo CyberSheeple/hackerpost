@@ -14,7 +14,6 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  overflow-x: hidden;
 }
 
 body {
@@ -29,6 +28,7 @@ body {
   color: #2c2c2c;
   background-color: #fefdfb;
   overflow-wrap: break-word;
+  overflow-x: clip;
 }
 
 /* ── Typography ───────────────────────────────── */
@@ -83,6 +83,11 @@ h4 {
 p {
   margin: 0 0 1rem;
   max-width: 65ch;
+}
+
+main {
+  min-width: 0;
+  max-width: 100%;
 }
 
 strong {
@@ -165,7 +170,6 @@ pre {
   border-left: 4px solid #b35900;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  max-width: 100%;
 }
 
 code {
@@ -184,9 +188,27 @@ samp {
 
 figure {
   margin: 1rem 0 1.5rem;
+}
+
+.pre-wrap {
+  display: block;
+  width: 100%;
   max-width: 100%;
+  margin: 1rem 0 1.5rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.pre-wrap pre {
+  width: max-content;
+  min-width: 100%;
+  margin: 0;
+  overflow: visible;
+}
+
+/* RFC Internet-Draft: scale monospace to fit ~75-column lines on phones */
+.rfc-draft pre {
+  font-size: clamp(0.45rem, calc((100vw - 4.5rem) / 45), 0.875rem);
 }
 
 /* ── Blockquotes ──────────────────────────────── */
